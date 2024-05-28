@@ -1,0 +1,26 @@
+{
+    "name": "bierrysept/megagroup-test-project",
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    },
+    "license": "GNUGPL",
+    "autoload": {
+        "psr-4": {
+            "Bierrysept\\MegagroupTestProject\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bierrysept\\MegagroupTestProject\\Test\\": "test/"
+        }
+    },
+    "authors": [
+        {
+            "name": "bierrysept",
+            "email": "bierrysept@gmail.com"
+        }
+    ],
+  "require": {
+    "ext-ds": "*"
+  }
+}
