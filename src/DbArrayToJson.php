@@ -2,17 +2,20 @@
 
 namespace Bierrysept\MegagroupTestProject;
 
-use Ds\Queue;
-
 class DbArrayToJson
 {
 
+    /**
+     * Конвертирует массив определенного вида в json
+     *
+     * @param array $dbArray
+     * @return string
+     */
     public static function convert(array $dbArray): string
     {
         $array = [];
 
         unset ($dbArray[0]);
-
 
         foreach ($dbArray as $key => $dbLine) {
             if ($dbLine[1] == "0") {
@@ -35,15 +38,19 @@ class DbArrayToJson
 
         $preJson = json_encode($array, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
-        return str_replace(["    ", "\n"], ["  ","\r\n"], $preJson);
+        return static::getPhpStormStyledFromDefaultPretty($preJson);
     }
 
-    public static function pushDaughter(array $base, array $input, bool &$wasPushed=false)
+    /**
+     * Ожидает строчку из массива определенного вида и помещает её по её parent_id в нужный объект
+     *
+     * @param array $base основное дерево
+     * @param array $input строчка определенного вида
+     * @param bool $wasPushed
+     * @return array
+     */
+    public static function pushDaughter(array $base, array $input, bool &$wasPushed=false): array
     {
-        if ($wasPushed) {
-            return $base;
-        }
-
         if (isset($base[$input[1]]["children"])) {
             $base[$input[1]]["children"][$input[0]] = [
                 "name" => $input[2]
@@ -71,5 +78,16 @@ class DbArrayToJson
         }
 
         return $base;
+    }
+
+    /**
+     * Переводит стиль обычного JSON из PHP в стиль из PhpStorm
+     *
+     * @param bool|string $preJson
+     * @return string
+     */
+    private static function getPhpStormStyledFromDefaultPretty(bool|string $preJson): string
+    {
+        return str_replace(["    ", "\n"], ["  ", "\r\n"], $preJson);
     }
 }

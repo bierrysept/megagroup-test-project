@@ -42,8 +42,8 @@ class DbArrayToJsonTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function testConvertEilerDaughterItem() {
-        $fileContents = file_get_contents(__DIR__."/csvs/eilerDaughterItem.csv");
+    public function testConvertEarlyDaughterItem() {
+        $fileContents = file_get_contents(__DIR__ . "/csvs/earlyDaughterItem.csv");
         $dbArray = CsvToArray::convert($fileContents);
 
         $expected = file_get_contents(__DIR__."/jsons/daughterItem.json");
